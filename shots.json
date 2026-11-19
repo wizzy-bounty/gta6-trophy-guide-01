@@ -1,5 +1,1 @@
-[
-  { "file": "1-checklist.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "2-silver.jpg", "path": "/", "grade": "silver", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "3-bronze.jpg", "path": "/", "grade": "bronze", "scroll": 1400, "viewport": { "width": 1280, "height": 800 } }
-]
+[{"file":"1-cover.jpg","path":"/?earned=1,2,3,14,15,17,28&detail=28&filter=missable","viewport":{"height":800,"width":1280}},{"file":"2-roadmap.jpg","path":"/?view=roadmap","viewport":{"height":800,"width":1280}},{"file":"3-missable-filter.jpg","path":"/?filter=missable","viewport":{"height":800,"width":1280}},{"file":"4-trophy-detail.jpg","path":"/?detail=17&earned=15,17","viewport":{"height":800,"width":1280}}]
