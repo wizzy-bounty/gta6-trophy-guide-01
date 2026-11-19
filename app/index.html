@@ -3,23 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Leonida Platinum Atlas — GTA VI Trophy Guide &amp; Tracker</title>
+<meta name="description" content="An unofficial, offline guide and tracker for all 55 Grand Theft Auto VI trophies on PlayStation 5: official names, cited guides, a roadmap to the platinum and a saved checklist.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="masthead">
+  <p class="kicker">Grand Theft Auto VI · PlayStation 5 · Unofficial fan guide</p>
+  <h1>Leonida Platinum Atlas</h1>
+  <p class="subtitle">Every one of the 55 trophies — official names, descriptions and grades, a guide with its sources for each one, a roadmap to the platinum, and a checklist that remembers your progress.</p>
+  <div class="progress-wrap" aria-label="Platinum progress">
+    <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+    <p id="progressText" class="progress-text">0 of 55 earned · 0% to the platinum</p>
+    <p id="gradeCounts" class="grade-counts"></p>
+  </div>
+  <p class="save-warning">⚠ GTA VI has <strong>no mission replay</strong> and no New Game Plus. Keep a manual save at the start of every chapter and one before the final mission. Cheats disable trophies. The only confirmed missable trophy is <strong>Positive Mental Attitude</strong> — meditate at Lucia's balcony spot in Chapter 1 before the chapter ends.</p>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<nav class="toolbar" aria-label="Filters and tools">
+  <label class="search">Search <input id="search" type="search" placeholder="Trophy name or keyword…" autocomplete="off"></label>
+  <div class="filter-group" id="kindFilters" role="group" aria-label="Filter by kind">
+    <button type="button" data-kind="all" class="active">All 55</button>
+    <button type="button" data-kind="story">Story</button>
+    <button type="button" data-kind="missable">⚠ Missable</button>
+    <button type="button" data-kind="collectible">Collectibles</button>
+    <button type="button" data-kind="activity">Activities</button>
+    <button type="button" data-kind="online">Online</button>
+  </div>
+  <label class="grade">Grade
+    <select id="gradeFilter">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="toggle"><input id="spoilerToggle" type="checkbox" checked> Hide story spoilers</label>
+  <label class="toggle"><input id="hideEarnedToggle" type="checkbox"> Hide earned</label>
+  <button id="exportBtn" type="button">⬇ Export progress</button>
+  <label class="import-btn">⬆ Import progress <input id="importFile" type="file" accept="application/json,.json"></label>
+</nav>
+
+<main>
+  <section id="roadmap" class="roadmap" aria-label="Roadmap to the platinum">
+    <h2>Roadmap to the platinum — <span class="platinum-name">Vice Got a Price!</span></h2>
+    <p class="roadmap-intro">Five phases, in order. Finish the story first, then strangers, then collectibles, then activities, then the crime-spree cleanup — and 100% completion (A Long Road) falls just before the platinum. About 200 hours, one playthrough, all offline.</p>
+    <ol id="roadmapList" class="roadmap-list"></ol>
+  </section>
+
+  <div class="layout">
+    <section class="checklist" aria-label="Trophy checklist">
+      <h2 id="listHeading">Trophy checklist</h2>
+      <p id="emptyNote" class="empty-note" hidden></p>
+      <ul id="trophyList" class="trophy-list"></ul>
+    </section>
+
+    <aside class="detail" aria-label="Selected trophy guide">
+      <div id="detailPanel">
+        <p class="detail-hint">Select a trophy on the left to read its full guide, its sources and its missable warning here.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <h2>Sources &amp; notes</h2>
+  <p>Names, descriptions and grades are PlayStation's official list as published 18 November 2026. Every guide on this page is written in our own words for this atlas; each trophy's guide names the sources its facts come from, and a claim with no source earns no credit. Launch-week methods that were still unconfirmed are marked as such — check the cited guides again after launch week.</p>
+  <ul id="sourceList" class="source-list"></ul>
+  <p class="disclaimer">Unofficial fan guide. Not affiliated with Rockstar Games, Sony or PlayStation. No Rockstar logo, artwork, box art or game screenshot is used here; the look is our own. The list is the same 55 trophies on Xbox Series X|S as achievements (1,000 Gamerscore).</p>
+  <p class="credit">Leonida Platinum Atlas — built for the make.fun GTA 6 trophy guide bounty. <a href="https://make.fun/c/gta6-trophy-guide-01">make.fun/c/gta6-trophy-guide-01</a></p>
+</footer>
 <script type="module" src="app.js"></script>
 </body>
 </html>

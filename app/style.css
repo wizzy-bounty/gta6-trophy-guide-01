@@ -1,7 +1,151 @@
-body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
-header { display: flex; justify-content: space-between; align-items: baseline; }
-.controls { display: flex; gap: 16px; margin: 12px 0; align-items: center; }
-.import input { font-size: 12px; }
-table { border-collapse: collapse; width: 100%; }
-th, td { border-bottom: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; white-space: pre-line; }
-th { background: #f2f2f2; }
+/* Leonida Platinum Atlas — own look: dusk over Leonida.
+   Deep teal night, sunset orange and gold; no Rockstar art, no images at all —
+   the colour comes from CSS gradients and the grade badges. */
+:root {
+  --night: #0d1b26;
+  --night-2: #122634;
+  --panel: #162e3d;
+  --panel-2: #1b3a4d;
+  --ink: #eef4f6;
+  --muted: #a9c2cc;
+  --line: #2c4a5c;
+  --sunset: #ff7a3d;
+  --gold: #f5c542;
+  --silver: #c9d4d8;
+  --bronze: #d08a4e;
+  --platinum: #8fe3e0;
+  --danger: #ff5d5d;
+  --ok: #7ddf8a;
+  --radius: 12px;
+}
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(180deg, #0d1b26 0%, #10222f 55%, #142a1f 100%);
+  color: var(--ink);
+  line-height: 1.5;
+}
+a { color: var(--gold); }
+.masthead {
+  padding: 28px 20px 18px;
+  background:
+    radial-gradient(900px 220px at 85% -40px, rgba(255, 122, 61, .45), transparent 60%),
+    radial-gradient(700px 200px at 10% -30px, rgba(245, 197, 66, .28), transparent 55%),
+    var(--night);
+  border-bottom: 3px solid var(--sunset);
+}
+.kicker { margin: 0 0 6px; letter-spacing: .14em; text-transform: uppercase; font-size: 12px; color: var(--muted); }
+h1 { margin: 0 0 8px; font-size: 42px; line-height: 1.05; letter-spacing: -.01em; }
+.subtitle { max-width: 760px; margin: 0 0 16px; color: var(--muted); font-size: 17px; }
+.progress-wrap { max-width: 760px; }
+.progress-bar { height: 14px; border-radius: 999px; background: #0a141c; border: 1px solid var(--line); overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--sunset), var(--gold)); transition: width .3s; }
+.progress-text { margin: 8px 0 2px; font-weight: 700; }
+.grade-counts { margin: 0; color: var(--muted); font-size: 14px; }
+.save-warning {
+  max-width: 760px; margin: 14px 0 0; padding: 10px 12px;
+  background: rgba(255, 93, 93, .12); border: 1px solid rgba(255, 93, 93, .5);
+  border-radius: var(--radius); font-size: 14px;
+}
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  padding: 14px 20px; background: var(--night-2);
+  border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5;
+}
+.search input, .grade select {
+  background: var(--panel); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 8px; padding: 7px 10px; font: inherit; font-size: 14px;
+}
+.search input { width: 220px; }
+.filter-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.filter-group button, #exportBtn, .import-btn {
+  font: inherit; font-size: 14px; cursor: pointer; color: var(--ink);
+  background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px;
+}
+.filter-group button.active { background: var(--sunset); border-color: var(--sunset); color: #1a0d05; font-weight: 700; }
+.toggle { font-size: 14px; display: flex; gap: 6px; align-items: center; }
+.import-btn input { display: none; }
+main { padding: 20px; max-width: 1240px; margin: 0 auto; }
+.roadmap { margin-bottom: 26px; }
+.roadmap h2 { margin: 0 0 6px; font-size: 26px; }
+.platinum-name { color: var(--platinum); }
+.roadmap-intro { color: var(--muted); max-width: 820px; }
+.roadmap-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.roadmap-list li {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px; border-top: 4px solid var(--sunset);
+}
+.roadmap-list li:nth-child(2) { border-top-color: var(--gold); }
+.roadmap-list li:nth-child(3) { border-top-color: var(--silver); }
+.roadmap-list li:nth-child(4) { border-top-color: var(--bronze); }
+.roadmap-list li:nth-child(5) { border-top-color: var(--platinum); }
+.roadmap-phase { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.roadmap-list h3 { margin: 4px 0 6px; font-size: 17px; }
+.roadmap-list p { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
+.roadmap-count { font-size: 13px; font-weight: 700; color: var(--gold); }
+.layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr); gap: 20px; align-items: start; }
+.checklist h2 { margin: 0 0 12px; font-size: 22px; }
+.empty-note { background: var(--panel); border: 1px dashed var(--line); border-radius: var(--radius); padding: 14px; color: var(--muted); }
+.trophy-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.trophy {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px 14px; cursor: pointer;
+}
+.trophy:hover { border-color: var(--sunset); }
+.trophy.selected { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+.trophy.earned { opacity: .72; }
+.trophy.earned .trophy-name { text-decoration: line-through; text-decoration-thickness: 2px; }
+.trophy-check { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--sunset); cursor: pointer; }
+.trophy-name { font-weight: 700; font-size: 16px; }
+.trophy-desc { color: var(--muted); font-size: 14px; margin-top: 2px; }
+.trophy-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.badge {
+  font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  border-radius: 999px; padding: 2px 9px; border: 1px solid transparent;
+}
+.badge.platinum { color: #062b2a; background: var(--platinum); }
+.badge.gold { color: #2a1f00; background: var(--gold); }
+.badge.silver { color: #1c2530; background: var(--silver); }
+.badge.bronze { color: #2b1503; background: var(--bronze); }
+.badge.hidden { color: var(--muted); border-color: var(--line); background: transparent; }
+.badge.missable { color: #fff; background: var(--danger); }
+.badge.count { color: var(--gold); border-color: var(--gold); background: transparent; }
+.badge.kind { color: var(--ink); border-color: var(--line); background: transparent; }
+.spoiler-hidden { color: transparent; text-shadow: 0 0 10px rgba(238, 244, 246, .7); user-select: none; }
+.detail { position: sticky; top: 132px; }
+.detail > div {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px; border-top: 4px solid var(--gold);
+}
+.detail-hint { color: var(--muted); margin: 0; }
+.detail h2 { margin: 0 0 4px; font-size: 24px; line-height: 1.2; }
+.detail .official { color: var(--muted); font-style: italic; margin: 0 0 10px; }
+.detail h3 { margin: 16px 0 6px; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.detail p { margin: 0 0 10px; }
+.detail .missable-box {
+  background: rgba(255, 93, 93, .12); border: 1px solid rgba(255, 93, 93, .55);
+  border-radius: 8px; padding: 10px 12px; font-size: 14px; margin: 0 0 10px;
+}
+.detail .source-list { margin: 0; padding-left: 18px; font-size: 14px; }
+.detail .source-list li { margin-bottom: 6px; }
+.detail .source-list a { word-break: break-word; }
+.detail .earned-line { font-weight: 700; color: var(--ok); }
+.detail .not-earned-line { font-weight: 700; color: var(--muted); }
+.detail .tick-btn {
+  font: inherit; font-weight: 700; cursor: pointer; margin-top: 12px;
+  background: var(--sunset); color: #1a0d05; border: 0; border-radius: 999px; padding: 9px 18px;
+}
+footer { padding: 24px 20px 40px; max-width: 1240px; margin: 0 auto; color: var(--muted); }
+footer h2 { color: var(--ink); font-size: 20px; margin: 0 0 8px; }
+.source-list { columns: 2; column-gap: 28px; font-size: 14px; }
+.source-list li { break-inside: avoid; margin-bottom: 6px; }
+.disclaimer, .credit { font-size: 14px; }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .detail { position: static; }
+  h1 { font-size: 32px; }
+  .source-list { columns: 1; }
+}
